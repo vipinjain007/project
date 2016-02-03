@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- load properties file in app context -->
+	<context:property-placeholder location="classpath:resources.properties" />
+
+	<!-- marking transaction annotation driven -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- initialize data source bean for database connections -->
+	<bean id="mediaoceanDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${datasource.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- setting hibernate session factory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+		 <property name="dataSource">
+			<ref bean="mediaoceanDataSource" />
+		</property> 
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop> 
+				<!-- <prop key="hibernate.connection.release_mode">auto</prop> -->
+				
+			<!-- 	<prop key="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</prop>
+				<prop key="hibernate.connection.url">${datasource.url}</prop> 
+				<prop key="hibernate.connection.driver_class">${jdbc.driver}</prop> 
+				<prop key="hibernate.connection.username">${jdbc.user} </prop> 
+				<prop key="hibernate.connection.password">${jdbc.password}</prop>  -->
+				
+				<!-- <prop key="hibernate.jdbc.batch_size">100</prop>
+				<prop key="hibernate.order_inserts">true</prop>
+				<prop key="hibernate.order_updates">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop> -->
+				
+				<!-- <prop key="hibernate.c3p0.max_size">100</prop>
+				<prop key="hibernate.c3p0.min_size">10</prop>
+				<prop key="hibernate.c3p0.checkoutTimeout">0</prop> 0 to Wait indefinitely on exhausting pool connections
+				<prop key="hibernate.c3p0.acquireRetryAttempts">-1</prop> Retry indefinitely on exhausting pool connections
+				<prop key="hibernate.c3p0.acquireRetryDelay">2000</prop> In Milliseconds -->
+				
+				<!-- <prop key="hibernate.c3p0.max_statements">0</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop> In Seconds
+				<prop key="maxIdleTimeExcessConnections">10</prop> In Seconds
+				<prop key="hibernate.c3p0.debugUnreturnedConnectionStackTraces">true</prop>
+				<prop key="hibernate.c3p0.unreturnedConnectionTimeout">120</prop>  In Seconds -->
+				
+				
+				
+			</props>
+		</property>
+
+		<property name="packagesToScan">
+			<list>
+				<value>com.mediaocean.rest</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- hibernate transaction manager -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>

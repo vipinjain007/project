@@ -1,0 +1,54 @@
+{
+	"id": "8d51178a-fcf6-dc2d-c620-724e6d9cb216",
+	"name": "sales",
+	"description": "This is collection for Rest services where we get all products sales as well as we can get details of particular product seles",
+	"order": [
+		"165fbd3c-5b8f-4e4f-f38b-c94a47fae663",
+		"98365da7-8e6b-84f0-cbe5-cd5d40d73baa"
+	],
+	"folders": [],
+	"timestamp": 1454349201526,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "165fbd3c-5b8f-4e4f-f38b-c94a47fae663",
+			"headers": "AUTHENTICATION_ID: 1\n",
+			"url": "http://localhost:8080/mediaoceanRest/salesDetails/get/products/all",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454353350430,
+			"name": "GetAll Products",
+			"description": "This is get Rest Service to get all product sales details",
+			"collectionId": "8d51178a-fcf6-dc2d-c620-724e6d9cb216",
+			"responses": []
+		},
+		{
+			"id": "98365da7-8e6b-84f0-cbe5-cd5d40d73baa",
+			"headers": "AUTHENTICATION_ID: 1\n",
+			"url": "http://localhost:8080/mediaoceanRest/salesDetails/get/products/1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1454353341288,
+			"name": "Get Productsbased on Id",
+			"description": "This is get Rest Service to get PARTICULAR product sales details BY ID",
+			"collectionId": "8d51178a-fcf6-dc2d-c620-724e6d9cb216",
+			"responses": []
+		}
+	]
+}
