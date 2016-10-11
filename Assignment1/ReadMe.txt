@@ -12,3 +12,4 @@
    http://localhost:8080/mediaoceanRest/salesDetails/get/products/all
     set Header token  AUTHENTICATION_ID =99 else you will not able to access this service
 [6]yOU can get service details form Postmancollection
+[7]Change
